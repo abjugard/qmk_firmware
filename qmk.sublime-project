@@ -1,0 +1,18 @@
+{
+	"folders":
+	[
+		{
+			"path": "keyboards/kbdfans/kbd8x_mk2"
+		},
+        {
+            "path": "keyboards/kbdfans/kbdpad_mk2"
+        },
+        {
+            "path": "keyboards/whitefox"
+        },
+        {
+            "path": "keyboards/k_type"
+        }
+	],
+    "menu_visible": false
+}

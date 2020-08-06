@@ -1,0 +1,962 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"if",
+				"ifmain\tif __name__ == '__main__'"
+			],
+			[
+				"inde",
+				"index_soup"
+			],
+			[
+				"titl",
+				"title_string"
+			],
+			[
+				"driver",
+				"driverLaptimes"
+			],
+			[
+				"dri",
+				"driverLaptimes"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "keyboards/kbdfans/kbd8x_mk2/keymaps/adriansi/keymap.c",
+			"settings":
+			{
+				"buffer_size": 3129,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "keyboards/kbdfans/kbd8x_mk2/keymaps/adriansi/adriansi.h",
+			"settings":
+			{
+				"buffer_size": 2301,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "keyboards/kbdfans/kbd8x_mk2/kbd8x_mk2.c",
+			"settings":
+			{
+				"buffer_size": 1812,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "/* Copyright 2019 Ryota Goto\n *\n * This program is free software: you can redistribute it and/or modify\n * it under the terms of the GNU General Public License as published by\n * the Free Software Foundation, either version 2 of the License, or\n * (at your option) any later version.\n *\n * This program is distributed in the hope that it will be useful,\n * but WITHOUT ANY WARRANTY; without even the implied warranty of\n * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n * GNU General Public License for more details.\n *\n * You should have received a copy of the GNU General Public License\n * along with this program.  If not, see <http://www.gnu.org/licenses/>.\n */\n#pragma once\n\n#include \"quantum.h\"  \n\n/* This a shortcut to help you visually see your layout.\n *\n * The first section contains all of the arguments representing the physical\n * layout of the board and position of the keys.\n *\n * The second converts the arguments into a two-dimensional array which\n * represents the switch matrix.\n */\n#define LAYOUT( \\\n    K000,       K001, K011, K002, K012,    K003, K013, K004, K014,    K005, K015, K006, K016,    K007, K017, K008, \\\n\tK020, K030, K021, K031, K022, K032, K023, K033, K024, K034, K025, K035, K026, K036, K066,    K027, K037, K028, \\\n\tK040, K050, K041, K051, K042, K052, K043, K053, K044, K054, K045, K055, K046,       K056,    K047, K057, K048, \\\n\tK060, K070, K061, K071, K062, K072, K063, K073, K064, K074, K065, K075,             K076,                      \\\n\tK080, K090, K081, K091, K082, K092, K083, K093, K084, K094, K085, K095,     K086,  K096,          K097,        \\\n\tK100, K110, K101,                   K103,                         K105, K115, K106, K116,    K107, K117, K108  \\\n) \\\n{ \\\n    { K000,  K001,  K002,  K003,  K004,  K005,  K006,  K007,  K008  }, \\\n\t{ KC_NO, K011,  K012,  K013,  K014,  K015,  K016,  K017,  KC_NO }, \\\n\t{ K020,  K021,  K022,  K023,  K024,  K025,  K026,  K027,  K028  }, \\\n\t{ K030,  K031,  K032,  K033,  K034,  K035,  K036,  K037,  KC_NO }, \\\n\t{ K040,  K041,  K042,  K043,  K044,  K045,  K046,  K047,  K048  }, \\\n\t{ K050,  K051,  K052,  K053,  K054,  K055,  K056,  K057,  KC_NO }, \\\n\t{ K060,  K061,  K062,  K063,  K064,  K065,  K066,  KC_NO, KC_NO }, \\\n\t{ K070,  K071,  K072,  K073,  K074,  K075,  K076,  KC_NO, KC_NO }, \\\n\t{ K080,  K081,  K082,  K083,  K084,  K085,  K086,  KC_NO, KC_NO }, \\\n\t{ K090,  K091,  K092,  K093,  K094,  K095,  K096,  K097,  KC_NO }, \\\n\t{ K100,  K101,  KC_NO, K103,  KC_NO, K105,  K106,  K107,  K108  }, \\\n\t{ K110,  KC_NO, KC_NO, KC_NO, KC_NO, K115,  K116,  K117,  KC_NO }  \\\n}\n\n#define LAYOUT_tkl_ansi( \\\n    K000,       K001, K011, K002, K012, K003, K013, K004, K014, K005, K015, K006, K016,    K007, K017, K008, \\\n    K020, K030, K021, K031, K022, K032, K023, K033, K024, K034, K025, K035, K026, K036,    K027, K037, K028, \\\n    K040, K050, K041, K051, K042, K052, K043, K053, K044, K054, K045, K055, K046, K056,    K047, K057, K048, \\\n    K060, K070, K061, K071, K062, K072, K063, K073, K064, K074, K065, K075,       K076,                      \\\n    K080,       K081, K091, K082, K092, K083, K093, K084, K094, K085, K095,       K086,          K097,       \\\n    K100, K110, K101,                   K103,                   K105, K115, K106, K116,    K107, K117, K108  \\\n) \\\n{ \\\n    { K000,  K001,  K002,  K003,  K004,  K005,  K006,  K007,  K008  }, \\\n    { KC_NO, K011,  K012,  K013,  K014,  K015,  K016,  K017,  KC_NO }, \\\n    { K020,  K021,  K022,  K023,  K024,  K025,  K026,  K027,  K028  }, \\\n    { K030,  K031,  K032,  K033,  K034,  K035,  K036,  K037,  KC_NO }, \\\n    { K040,  K041,  K042,  K043,  K044,  K045,  K046,  K047,  K048  }, \\\n    { K050,  K051,  K052,  K053,  K054,  K055,  K056,  K057,  KC_NO }, \\\n    { K060,  K061,  K062,  K063,  K064,  K065,  KC_NO, KC_NO, KC_NO }, \\\n    { K070,  K071,  K072,  K073,  K074,  K075,  K076,  KC_NO, KC_NO }, \\\n    { K080,  K081,  K082,  K083,  K084,  K085,  K086,  KC_NO, KC_NO }, \\\n    { KC_NO, K091,  K092,  K093,  K094,  K095,  KC_NO, K097,  KC_NO }, \\\n    { K100,  K101,  KC_NO, K103,  KC_NO, K105,  K106,  K107,  K108  }, \\\n    { K110,  KC_NO, KC_NO, KC_NO, KC_NO, K115,  K116,  K117,  KC_NO }  \\\n}\n\n#define LAYOUT_tkl_adriansi( \\\n    K000,       K001, K011, K002, K012, K003, K013, K004, K014, K005, K015, K006, K016,    K007, K017, K008, \\\n    K020, K030, K021, K031, K022, K032, K023, K033, K024, K034, K025, K035, K026, K036,    K027, K037, K028, \\\n    K040, K050, K041, K051, K042, K052, K043, K053, K044, K054, K045, K055, K046, K056,    K047, K057, K048, \\\n    K060, K070, K061, K071, K062, K072, K063, K073, K064, K074, K065, K075,       K076,                      \\\n    K080, K090, K081, K091, K082, K092, K083, K093, K084, K094, K085, K095,       K086,          K097,       \\\n    K100, K110, K101,                   K103,                   K105, K115, K106, K116,    K107, K117, K108  \\\n) \\\n{ \\\n    { K000,  K001,  K002,  K003,  K004,  K005,  K006,  K007,  K008  }, \\\n    { KC_NO, K011,  K012,  K013,  K014,  K015,  K016,  K017,  KC_NO }, \\\n    { K020,  K021,  K022,  K023,  K024,  K025,  K026,  K027,  K028  }, \\\n    { K030,  K031,  K032,  K033,  K034,  K035,  K036,  K037,  KC_NO }, \\\n    { K040,  K041,  K042,  K043,  K044,  K045,  K046,  K047,  K048  }, \\\n    { K050,  K051,  K052,  K053,  K054,  K055,  K056,  K057,  KC_NO }, \\\n    { K060,  K061,  K062,  K063,  K064,  K065,  KC_NO, KC_NO, KC_NO }, \\\n    { K070,  K071,  K072,  K073,  K074,  K075,  K076,  KC_NO, KC_NO }, \\\n    { K080,  K081,  K082,  K083,  K084,  K085,  K086,  KC_NO, KC_NO }, \\\n    { K090,  K091,  K092,  K093,  K094,  K095,  KC_NO, K097,  KC_NO }, \\\n    { K100,  K101,  KC_NO, K103,  KC_NO, K105,  K106,  K107,  K108  }, \\\n    { K110,  KC_NO, KC_NO, KC_NO, KC_NO, K115,  K116,  K117,  KC_NO }  \\\n}\n\n#define LAYOUT_tkl_iso( \\\n    K000,       K001, K011, K002, K012, K003, K013, K004, K014, K005, K015, K006, K016,    K007, K017, K008, \\\n    K020, K030, K021, K031, K022, K032, K023, K033, K024, K034, K025, K035, K026, K036,    K027, K037, K028, \\\n    K040, K050, K041, K051, K042, K052, K043, K053, K044, K054, K045, K055, K046,          K047, K057, K048, \\\n    K060, K070, K061, K071, K062, K072, K063, K073, K064, K074, K065, K075, K056, K076,                      \\\n    K080, K090, K081, K091, K082, K092, K083, K093, K084, K094, K085, K095,       K086,          K097,       \\\n    K100, K110, K101,                   K103,                   K105, K115, K106, K116,    K107, K117, K108  \\\n) \\\n{ \\\n    { K000,  K001,  K002,  K003,  K004,  K005,  K006,  K007,  K008  }, \\\n    { KC_NO, K011,  K012,  K013,  K014,  K015,  K016,  K017,  KC_NO }, \\\n    { K020,  K021,  K022,  K023,  K024,  K025,  K026,  K027,  K028  }, \\\n    { K030,  K031,  K032,  K033,  K034,  K035,  K036,  K037,  KC_NO }, \\\n    { K040,  K041,  K042,  K043,  K044,  K045,  K046,  K047,  K048  }, \\\n    { K050,  K051,  K052,  K053,  K054,  K055,  K056,  K057,  KC_NO }, \\\n    { K060,  K061,  K062,  K063,  K064,  K065,  KC_NO, KC_NO, KC_NO }, \\\n    { K070,  K071,  K072,  K073,  K074,  K075,  K076,  KC_NO, KC_NO }, \\\n    { K080,  K081,  K082,  K083,  K084,  K085,  K086,  KC_NO, KC_NO }, \\\n    { K090,  K091,  K092,  K093,  K094,  K095,  KC_NO, K097,  KC_NO }, \\\n    { K100,  K101,  KC_NO, K103,  KC_NO, K105,  K106,  K107,  K108  }, \\\n    { K110,  KC_NO, KC_NO, KC_NO, KC_NO, K115,  K116,  K117,  KC_NO }  \\\n}\n",
+			"file": "keyboards/kbdfans/kbd8x_mk2/kbd8x_mk2.h",
+			"file_size": 5735,
+			"file_write_time": 132411837296869293,
+			"settings":
+			{
+				"buffer_size": 7319,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/MagicPython/settings/sublime/Python.sublime-build",
+					""
+				],
+				[
+					"Packages/MagicPython/settings/sublime/Python.sublime-build",
+					"Syntax Check"
+				]
+			],
+			[
+				"Packages/MagicPython/settings/sublime/Python.sublime-build",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 141.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"pacin",
+				"Package Control: Install Package"
+			],
+			[
+				"editpr",
+				"Project: Edit Project"
+			],
+			[
+				"menu",
+				"View: Toggle Menu"
+			],
+			[
+				"pretty",
+				"Pretty JSON: Format (Pretty Print) JSON"
+			],
+			[
+				"prett",
+				"Pretty JSON: Format (Pretty Print) JSON"
+			],
+			[
+				"sspy",
+				"Set Syntax: MagicPython"
+			],
+			[
+				"disabl",
+				"Package Control: Disable Package"
+			],
+			[
+				"pacrem",
+				"Package Control: Remove Package"
+			],
+			[
+				"color",
+				"UI: Select Color Scheme"
+			],
+			[
+				"bracket",
+				"Bracketeer: Select Inside Braces"
+			],
+			[
+				"uuid",
+				"Generate UUID v4"
+			],
+			[
+				"ppri",
+				"Pretty JSON: Format (Pretty Print) JSON"
+			],
+			[
+				"prettr",
+				"Pretty JSON: Format and Sort JSON"
+			],
+			[
+				"pref",
+				"Preferences: Settings"
+			],
+			[
+				"men",
+				"View: Toggle Menu"
+			],
+			[
+				"settings",
+				"Preferences: Settings"
+			],
+			[
+				"pacremo",
+				"Package Control: Remove Package"
+			],
+			[
+				"pret",
+				"Pretty JSON: Format (Pretty Print) JSON"
+			],
+			[
+				"ssjson",
+				"Set Syntax: JSON"
+			],
+			[
+				"jsopn",
+				"Pretty JSON: Format (Pretty Print) JSON"
+			],
+			[
+				"ssini",
+				"Set Syntax: INI"
+			],
+			[
+				"browse",
+				"Preferences: Browse Packages"
+			],
+			[
+				"sspowe",
+				"Set Syntax: PowerShell"
+			],
+			[
+				"sshbash",
+				"Set Syntax: Shell Script (Bash)"
+			],
+			[
+				"pac",
+				"Package Control: Upgrade/Overwrite All Packages"
+			],
+			[
+				"highv",
+				"BracketHighlighter: Toggle High Visibility Mode"
+			],
+			[
+				"box",
+				"Boxy Theme: Configuration"
+			],
+			[
+				"boxy",
+				"Boxy Theme: Activation"
+			]
+		],
+		"width": 631.0
+	},
+	"console":
+	{
+		"height": 162.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '6f4c264a24d933ce70df5dedcf1dcaee' + 'ebe013ee18cced0ef93d5f746d80ef60'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)",
+			"import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d39e33b79698005270310898eea76'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/rekoil/src/personal/qmk_firmware/keyboards/kbdfans/kbd8x_mk2",
+		"/Users/rekoil/src/personal/qmk_firmware/keyboards/kbdfans/kbd8x_mk2/keymaps",
+		"/Users/rekoil/src/personal/qmk_firmware/keyboards/kbdfans/kbd8x_mk2/keymaps/adriansi",
+		"/Users/rekoil/src/personal/qmk_firmware/keyboards/kbdfans/kbd8x_mk2/keymaps/default_ansi",
+		"/Users/rekoil/src/personal/qmk_firmware/keyboards/kbdfans/kbd8x_mk2/keymaps/default_iso"
+	],
+	"file_history":
+	[
+		"/Users/rekoil/src/personal/qmk_firmware/keyboards/kbdfans/kbd8x_mk2/keymaps/adriansi/readme.md",
+		"/Users/rekoil/src/personal/qmk_firmware/qmk.sublime-project",
+		"/C/Users/rekoil/Documents/My Games/Rocket League/TAGame/Config/TASystemSettings.ini",
+		"/C/msys64/home/rekoil/src/qmk_firmware/keyboards/k_type/k_type.c",
+		"/C/msys64/home/rekoil/src/qmk_firmware/keyboards/kbdfans/kbdpad_mk2/keymaps/adriansi/config.h",
+		"/C/msys64/home/rekoil/src/qmk_firmware/qmk.sublime-project",
+		"/C/msys64/home/rekoil/src/qmk_firmware/keyboards/kbdfans/kbdpad_mk2/keymaps/adriansi/keymap.c",
+		"/C/msys64/home/rekoil/src/qmk_firmware/keyboards/kbdfans/kbdpad_mk2/config.h",
+		"/C/Users/rekoil/Downloads/adriansi.json",
+		"/C/Users/rekoil/Desktop/4k_all.json",
+		"/C/Users/rekoil/Desktop/4k_only_real_and_dolby_vision.json",
+		"/C/Users/rekoil/Desktop/4k_only_real.json",
+		"/C/Users/rekoil/Desktop/real_4k.py",
+		"/C/Users/rekoil/AppData/Local/Temp/fz3temp-2/hekate_ipl.ini",
+		"/C/Users/rekoil/Desktop/only_real.json",
+		"/C/Users/rekoil/Desktop/only_dolby_vision.json",
+		"/C/Users/rekoil/Desktop/only_real4k_and_dolby_vision.json",
+		"/C/Users/rekoil/Desktop/only_real4k.json",
+		"/C/Users/rekoil/Desktop/all.json",
+		"/C/Users/rekoil/Desktop/lol.txt",
+		"/C/Users/rekoil/Desktop/output.txt",
+		"/C/Users/rekoil/AppData/Local/Fallout4/plugins.txt",
+		"/C/Users/rekoil/busybox",
+		"/C/Users/rekoil/scoop/buckets/extras/bucket/terminals.json",
+		"/C/Users/rekoil/Documents/My Games/Fallout4/Fallout4Custom.ini",
+		"/C/Users/rekoil/Documents/My Games/Fallout4/Fallout4.ini",
+		"/C/Users/rekoil/Documents/The Witcher 3/user.settings",
+		"/C/Program Files/CPUID/ROG CPU-Z/rog_cpuz_readme.txt",
+		"/C/Users/rekoil/Documents/My Games/Fallout4/Fallout4Prefs.ini",
+		"/C/Games/Steam/steamapps/common/The Witcher 3/Mods/mod0000_MergedFiles/content/scripts/game/components/inventoryComponent.ws",
+		"/C/Games/Steam/steamapps/common/The Witcher 3/WitcherScriptMerger.exe.config",
+		"/C/Games/Steam/steamapps/common/TW3/Mods/INSTALL NOW PART 3.txt",
+		"/C/Users/rekoil/AppData/Local/Temp/TC4Shell/O0000/user.settings.txt",
+		"/C/Games/Steam/steamapps/common/TW3/Mods/INSTALL NOW PART 2.txt",
+		"/C/Games/Steam/steamapps/common/The Witcher 3/Mods/INSTALL NOW PART 3.txt",
+		"/C/Games/Steam/steamapps/common/The Witcher 3/Mods/INSTALL NOW PART 2.txt",
+		"/C/Games/Steam/steamapps/common/The Witcher 3/Mods/ReadMe!.txt",
+		"/C/Users/rekoil/Downloads/hbgshop_aio_2.2.0b/switch/tinfoil/locations.conf",
+		"/C/Users/rekoil/Downloads/hbgshop_aio_2.2.0b/switch/tinfoil/socket.json",
+		"/C/Users/rekoil/AppData/Local/Temp/Temp1_tinfoil.latest.zip/switch/tinfoil/socket.json",
+		"/C/Users/rekoil/AppData/Local/Temp/Temp1_Kosmos-v13-2.zip/config/sys-ftpd/config.ini",
+		"/C/Users/rekoil/AppData/Local/Temp/fz3temp-2/config 2.ini",
+		"/C/Users/rekoil/AppData/Local/Temp/fz3temp-2/config.ini",
+		"/C/Users/rekoil/Desktop/SDCard/bootloader/hekate_ipl.ini",
+		"/C/Users/rekoil/Desktop/switch workbench/installed/installed.txt",
+		"/C/Users/rekoil/AppData/Local/Temp/Temp1_SDSetup(7_8_19).zip/sd/bootloader/hekate_ipl.ini",
+		"/C/Users/rekoil/AppData/Local/Temp/TC4Shell/O0000/Instructions.txt",
+		"/C/Users/rekoil/AppData/Local/Temp/fz3temp-2/patches.ini",
+		"/C/Users/rekoil/Desktop/Kosmos_patches/bootloader/patches.ini",
+		"/C/Program Files/WindowsApps/52569scottxu.ArchLinux_1.0.28.0_x64__xhwh673y3hxf8/AppxManifest.xml",
+		"/C/Users/rekoil/Downloads/SetupDiagResults.log",
+		"/C/Users/rekoil/AppData/Local/Packages/WindowsTerminalDev_8wekyb3d8bbwe/RoamingState/profiles.json",
+		"/C/Users/rekoil/scoop/apps/wsl-terminal/current/etc/minttyrc",
+		"/C/Users/rekoil/Desktop/installer.sh",
+		"/C/msys64/home/rekoil/ligaturetest.txt",
+		"/C/msys64/home/rekoil/.minttyrc",
+		"/C/Users/rekoil/Desktop/Win10.ps1",
+		"/C/Users/rekoil/Desktop/kll.json",
+		"/C/Users/rekoil/Desktop/1.txt",
+		"/C/Windows/System32/drivers/etc/hosts",
+		"/C/Users/rekoil/Downloads/UniFi-changelog-5.11.x.txt",
+		"/C/Users/rekoil/Desktop/laptimes.json",
+		"/C/Games/Steam/steamapps/common/Fallout New Vegas/Data/menus/options/start_menu.xml",
+		"/C/Users/rekoil/AppData/Local/Temp/TC4Shell/O0001/howto.txt",
+		"/C/Games/Steam/steamapps/common/Fallout New Vegas/Fallout_default.ini",
+		"/C/Users/rekoil/Documents/My Games/FalloutNV/Fallout.ini",
+		"/C/Games/Steam/steamapps/common/Fallout New Vegas/enblocal.ini",
+		"/C/Users/rekoil/Documents/apex_crash.txt",
+		"/C/Users/rekoil/Downloads/k_type_keymap_mine.json",
+		"/C/msys64/home/rekoil/src/qmk_firmware/layouts/default/65_ansi/layout.json",
+		"/C/msys64/home/rekoil/src/qmk_firmware/keyboards/k_type/keymaps/belak/keymap.c",
+		"/C/msys64/home/rekoil/src/qmk_firmware/keyboards/k_type/keymaps/default/keymap.c",
+		"/C/Users/rekoil/AppData/Local/Temp/Temp1_KType-Standard-16877622a3e57e794a5cb31502d60dba.zip/KType-Standard.json",
+		"/C/Users/rekoil/AppData/Local/Temp/Temp1_KType-Standard-16877622a3e57e794a5cb31502d60dba.zip/kll.json",
+		"/C/Users/rekoil/AppData/Roaming/streamlink/streamlinkrc",
+		"/N/stuff/switch-backup/e9c66491/lockpick/prod.keys",
+		"/C/Users/rekoil/Desktop/2.txt",
+		"/C/msys64/home/rekoil/.zshrc",
+		"/C/Users/rekoil/AppData/Local/Temp/TC4Shell/O0000/nsw.standards.2019-console.nfo",
+		"/C/Users/rekoil/Downloads/4nxci-v2.10_win64/README.md",
+		"/C/Users/rekoil/Downloads/4nxci-v2.10_win64/keys.dat",
+		"/C/Games/World of Warcraft/Interface/AddOns/AdiBags_Hearthstones/supported_items.md",
+		"/C/Games/World of Warcraft/WTF/Account/1172927#2/Balnazzar/Marängsviss/SavedVariables/LockoutChecker.lua",
+		"/C/Games/World of Warcraft/Interface/AddOns/TomTom/TomTom_Waypoints.lua",
+		"/C/Games/World of Warcraft/Interface/AddOns/TomTom/Localization.enUS.lua",
+		"/C/Games/World of Warcraft/Interface/AddOns/AdiBags_Hearthstones/AdiBags_Hearthstones.lua",
+		"/C/Games/World of Warcraft/Interface/AddOns/AdiBags_Hearthstones/AdiBags_Hearthstones.toc",
+		"/D/sources/PID.txt",
+		"/C/Users/rekoil/Desktop/1.json",
+		"/C/Games/World of Warcraft/Interface/AddOns/MasterPlanA/MasterPlanA.toc",
+		"/C/Users/rekoil/AppData/Local/TslGame/Saved/Config/WindowsNoEditor/Engine.ini",
+		"/C/Games/World of Warcraft/Interface/AddOns/ZygorGuidesViewer/Pointer.lua",
+		"/C/Games/World of Warcraft/Interface/ZygorGuidesViewer/Ver.lua",
+		"/C/Games/World of Warcraft/Interface/AddOns/ZygorGuidesViewer/Data/Gold/files.xml",
+		"/C/Users/rekoil/AppData/Roaming/Depressurizer/Default.profile",
+		"/C/Users/rekoil/AppData/Local/TslGame/Saved/Config/WindowsNoEditor/Game.ini",
+		"/C/Users/rekoil/Downloads/Translation.041D",
+		"/C/Users/rekoil/Documents/BioWare/Mass Effect 3/BioGame/Config/GamerSettings.ini",
+		"/C/Users/rekoil/Desktop/hwlist_Semlan.xml",
+		"/C/msys64/etc/nsswitch.conf",
+		"/C/Users/rekoil/Desktop/SaveSpotlightImages.ps1",
+		"/C/Games/Steam/steamapps/common/Fallout 4/Data/interface/lyrConf.xml",
+		"/C/Games/Steam/steamapps/common/Fallout 4/enblocal.ini",
+		"/C/Games/Steam/steamapps/common/Fallout 4/enbseries.ini",
+		"/C/msys64/home/rekoil/sshd-setup.sh",
+		"/C/Users/rekoil/AppData/Roaming/nhm2/configs/General.json",
+		"/C/msys64/home/rekoil/.ssh/config",
+		"/C/msys64/msys2.ini",
+		"/C/msys64/msys2_shell.cmd",
+		"/C/msys64/home/rekoil/.bash_profile",
+		"/C/msys64/home/rekoil/.bashrc",
+		"/C/Users/rekoil/Desktop/ALOT Addon ME3/DOUBLE_CLICK_ME_(please).bat",
+		"/C/Games/Mass Effect 3/BIOGame/CookedPCConsole/Coalesced/05_biogame.json",
+		"/C/Games/Mass Effect 3/BIOGame/CookedPCConsole/Coalesced/10_bioweapon.json",
+		"/C/Users/rekoil/AppData/Local/Temp/Temp1_coalesce-r90_b116.zip/readme.txt",
+		"/C/Games/Mass Effect 3/BIOGame/CookedPCConsole/Coalesced/BioWeapon.xml",
+		"/C/Users/rekoil/Desktop/ALOT Addon ME3/list_downloads.txt",
+		"/C/Users/rekoil/Documents/BioWare/Mass Effect 3/BioGame/Config/GamerSettings.ini.bak",
+		"/C/Users/rekoil/Desktop/ALOT for ME3 2017/errors-precheck.txt",
+		"/C/Users/rekoil/Documents/BioWare/Mass Effect 2/BIOGame/Config/GamerSettings.ini",
+		"/C/Users/rekoil/AppData/Local/Temp/Temp1_Alliance Warpack-528-1-0.zip/Alliance Warpack/Readme.txt",
+		"/C/Users/rekoil/Desktop/ALOT 2017 ME3/list_downloads.txt",
+		"/C/Users/rekoil/Desktop/ALOT for ME3 2017/installer.ini",
+		"/C/Users/rekoil/Documents/BioWare/Mass Effect 2/BIOGame/Config/MassEffect2Config.ini",
+		"/C/Users/rekoil/Desktop/ALOT 2017 Addon/list_downloads.txt",
+		"/C/Users/rekoil/Desktop/ALOT for ME2 2017/errors-precheck.txt",
+		"/C/msys64/home/rekoil/tjenna.bil.txt",
+		"/C/Users/rekoil/AppData/Local/Temp/TC4Shell/O0000/ReadMe.txt"
+	],
+	"find":
+	{
+		"height": 48.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"LAYOUT_tkl_adriansi",
+			"LAYOUT",
+			"    { K000,  K001,  K002,  K003,  K004,  K005,  K006,  K007,  K008  }, \\\n    { KC_NO, K011,  K012,  K013,  K014,  K015,  K016,  K017,  KC_NO }, \\\n    { K020,  K021,  K022,  K023,  K024,  K025,  K026,  K027,  K028  }, \\\n    { K030,  K031,  K032,  K033,  K034,  K035,  K036,  K037,  KC_NO }, \\\n    { K040,  K041,  K042,  K043,  K044,  K045,  K046,  K047,  K048  }, \\\n    { K050,  K051,  K052,  K053,  K054,  K055,  K056,  K057,  KC_NO }, \\\n    { K060,  K061,  K062,  K063,  K064,  K065,  KC_NO, KC_NO, KC_NO }, \\\n    { K070,  K071,  K072,  K073,  K074,  K075,  K076,  KC_NO, KC_NO }, \\\n    { K080,  K081,  K082,  K083,  K084,  K085,  K086,  KC_NO, KC_NO }, \\",
+			"    { K000,  K001,  K002,  K003,  K004,  K005,  K006,  K007,  K008  }, \\\n    { KC_NO, K011,  K012,  K013,  K014,  K015,  K016,  K017,  KC_NO }, \\\n    { K020,  K021,  K022,  K023,  K024,  K025,  K026,  K027,  K028  }, \\\n    { K030,  K031,  K032,  K033,  K034,  K035,  K036,  K037,  KC_NO }, \\\n    { K040,  K041,  K042,  K043,  K044,  K045,  K046,  K047,  K048  }, \\\n    { K050,  K051,  K052,  K053,  K054,  K055,  K056,  K057,  KC_NO }, \\\n    { K060,  K061,  K062,  K063,  K064,  K065,  KC_NO, KC_NO, KC_NO }, \\\n    { K070,  K071,  K072,  K073,  K074,  K075,  K076,  KC_NO, KC_NO }, \\",
+			"  K003,  K004,  K005,  K006,  K007,  K008  }, \\\n    { KC_NO, K011,  K012,  K013,  K014,  K015,  K016,  K017,  KC_NO }, \\\n    { K020,  K021,  K022,  K023,  K024,  K025,  K026,  K027,  K028  }, \\\n    { K030,  K031,  K032,  K033,  K034,  K035,  K036,  K037,  KC_NO }, \\\n    { K040,  K041,  K042,  K043,  K044,  K045,  K046,  K047,  K048  }, \\\n    { K050,  K051,  K052,  K053,  K054,  K055,  K056,  K057,  KC_NO }, \\\n    { K060,  K061,  K062,  K063,  K064,  K065,  KC_NO, KC_NO, KC_NO }, \\\n    { K070,  K071,  K072,  ",
+			"  K003,  K004,  K005,  K006,  K007,  K008  }, \\\n    { KC_NO, K011,  K012,  K013,  K014,  K015,  K016,  K017,  KC_NO }, \\\n    { K020,  K021,  K022,  K023,  K024,  K025,  K026,  K027,  K028  }, \\\n    { K030,  K031,  K032,  K033,  K034,  K035,  K036,  K037,  KC_NO }, \\\n    { K040,  K041,  K042,  K043,  K044,  K045,  K046,  K047,  K048  }, \\\n    { K050,  K051,  K052,  K053,  K054,  K055,  K056,  K057,  KC_NO }, \\\n    { K060,  K061,  K062,  K063,  K064,  K065,  KC_NO, KC_NO, KC_NO }, \\\n    { K070,  K071,  K072,  K073,  K074,  K075,  K076,  KC_NO, KC_NO }, \\\n    { K080,  K081,  K082,  K083,  K084,  K085,  K086,  KC_NO, KC_NO }, \\\n    { K090,  K091,  K092, ",
+			"    { K000,  K001,  K002,  K003,  K004,  K005,  K006,  K007,  K008  }, \\\n    { KC_NO, K011,  K012,  K013,  K014,  K015,  K016,  K017,  KC_NO }, \\\n    { K020,  K021,  K022,  K023,  K024,  K025,  K026,  K027,  K028  }, \\\n    { K030,  K031,  K032,  K033,  K034,  K035,  K036,  K037,  KC_NO }, \\\n    { K040,  K041,  K042,  K043,  K044,  K045,  K046,  K047,  K048  }, \\\n    { K050,  K051,  K052,  K053,  K054,  K055,  K056,  K057,  KC_NO }, \\\n    { K060,  K061,  K062,  K063,  K064,  K065,  KC_NO, KC_NO, KC_NO }, \\\n    { K070,  K071,  K072,  K073,  K074,  K075,  K076,  KC_NO, KC_NO }, \\\n    { K080,  K081,  K082,  K083,  K084,  K085,  K086,  KC_NO, KC_NO }, \\\n    { K090,  K091,  K092, ",
+			"    { K000,  K001,  K002,  K003,  K004,  K005,  K006,  K007,  K008  }, \\\n    { KC_NO, K011,  K012,  K013,  K014,  K015,  K016,  K017,  KC_NO }, \\\n    { K020,  K021,  K022,  K023,  K024,  K025,  K026,  K027,  K028  }, \\\n    { K030,  K031,  K032,  K033,  K034,  K035,  K036,  K037,  KC_NO }, \\\n    { K040,  K041,  K042, ",
+			"    { K000,  K001,  K002,  K003,  K004,  K005,  K006,  K007,  K008  }, \\\n    { KC_NO, K011,  K012,  K013,  K014,  K015,  K016,  K017,  KC_NO }, \\\n    { K020,  K021,  K022,  K023,  K024,  K025,  K026,  K027,  K028  }, \\\n    { K030,  K031,  K032,  K033,  K034,  K035,  K036,  K037,  KC_NO }, \\\n    { K040,  K041,  K042,  K043,  K044,  K045,  K046,  K047,  K048  }, \\\n    { K050,  K051,  K052,  K053,  K054,  K055,  K056,  K057,  KC_NO }, \\\n    { K060,  K061,  K062,  K063,  K064,  K065,  KC_NO, KC_NO, KC_NO }, \\\n    { K070,  K071,  K072,  K073,  K074,  K075,  K076,  KC_NO, KC_NO }, \\\n    { K080,  K081,  K082,  K083,  K084,  K085,  K086,  KC_NO, KC_NO }, \\\n    { K090,  K091,  K092,  K093,  K094,  K095,  KC_NO, K097,  KC_NO }, \\\n    { K100,  K101,  KC_NO, K103,  KC_NO, K105,  K106,  K107,  K108  }, \\\n    { K110,  KC_NO, KC_NO, KC_NO, KC_NO, K115,  K116,  K117,  KC_NO }  \\",
+			"bloom",
+			"is_command",
+			"N_A",
+			"\\",
+			" \\",
+			"\\",
+			"_,",
+			"_______",
+			"KC_",
+			",",
+			"           ",
+			"          ",
+			"           "
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "keyboards/kbdfans/kbd8x_mk2/keymaps/adriansi/keymap.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3129,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1916,
+								1916
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										2965,
+										2966
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/round_bracket.png",
+										"region.yellowish"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										1907,
+										1908
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"editorconfig": true,
+							"ensure_newline_at_eof_on_save": true,
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true,
+							"trim_trailing_white_space_on_save": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 116.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "keyboards/kbdfans/kbd8x_mk2/keymaps/adriansi/adriansi.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2301,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								737,
+								737
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"editorconfig": true,
+							"ensure_newline_at_eof_on_save": true,
+							"git_gutter_is_enabled": true,
+							"open_with_edit": true,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true,
+							"trim_trailing_white_space_on_save": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "keyboards/kbdfans/kbd8x_mk2/kbd8x_mk2.c",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 1812,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"editorconfig": true,
+							"ensure_newline_at_eof_on_save": true,
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true,
+							"trim_trailing_white_space_on_save": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "keyboards/kbdfans/kbd8x_mk2/kbd8x_mk2.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7319,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								694,
+								0
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"editorconfig": true,
+							"ensure_newline_at_eof_on_save": true,
+							"git_gutter_is_enabled": true,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true,
+							"trim_trailing_white_space_on_save": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 33.0
+	},
+	"input":
+	{
+		"height": 57.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": false,
+	"output.exec":
+	{
+		"height": 232.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "qmk.sublime-project",
+	"replace":
+	{
+		"height": 62.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 302.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
